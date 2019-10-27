@@ -31,7 +31,13 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-es": "^2.0.0"
+    "babel-eslint": "^10.0.3",
+    "eslint": "5.16.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-es": "^2.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0"
   }
 }
