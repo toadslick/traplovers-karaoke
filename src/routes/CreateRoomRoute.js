@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RoomCreateRoute = () => {
+const CreateRoomRoute = () => {
   return <h1>TODO: Create Room</h1>;
 };
 
-export default RoomCreateRoute;
+export default CreateRoomRoute;

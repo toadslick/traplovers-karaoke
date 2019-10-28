@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RoomViewRoute = () => {
+const ViewRoomRoute = () => {
   return <h1>TODO: View Room</h1>;
 };
 
-export default RoomViewRoute;
+export default ViewRoomRoute;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const RoomIndexRoute = () => {
+const ListRoomsRoute = () => {
   return (
     <>
       <h1>TODO: List Rooms</h1>
@@ -12,4 +12,4 @@ const RoomIndexRoute = () => {
   );
 };
 
-export default RoomIndexRoute;
+export default ListRoomsRoute;

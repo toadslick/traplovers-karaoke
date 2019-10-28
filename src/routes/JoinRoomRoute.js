@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RoomJoinRoute = () => {
+const JoinRoomRoute = () => {
   return <h1>TODO: Join Room</h1>;
 };
 
-export default RoomJoinRoute;
+export default JoinRoomRoute;
