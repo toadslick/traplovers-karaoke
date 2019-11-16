@@ -1,17 +1,17 @@
-import CreateRoomRoute from './CreateRoomRoute';
-import EditRoomRoute from './EditRoomRoute';
-import ListRoomsRoute from './ListRoomsRoute';
-import ViewRoomRoute from './ViewRoomRoute';
-import JoinRoomRoute from './JoinRoomRoute';
-import SearchSongsRoute from './SearchSongsRoute';
+import CreateRoom from './CreateRoom';
+import EditRoom from './EditRoom';
+import ListRooms from './ListRooms';
+import ViewRoom from './ViewRoom';
+import SearchSongs from './SearchSongs';
+import Playing from './Playing';
 
 const routes = [
-  { Component: ListRoomsRoute, path: '/' },
-  { Component: CreateRoomRoute, path: '/room/new' },
-  { Component: ViewRoomRoute, path: '/room/:id' },
-  { Component: JoinRoomRoute, path: '/room/:id/join' },
-  { Component: EditRoomRoute, path: '/room/:id/edit' },
-  { Component: SearchSongsRoute, path: '/room/:id/songs' },
+  { Component: ListRooms, path: '/' },
+  { Component: CreateRoom, path: '/room/new' },
+  { Component: ViewRoom, path: '/room/:id' },
+  { Component: Playing, path: '/room/:id/playing' },
+  { Component: EditRoom, path: '/room/:id/edit' },
+  { Component: SearchSongs, path: '/room/:id/search' },
 ];
 
 export default routes;

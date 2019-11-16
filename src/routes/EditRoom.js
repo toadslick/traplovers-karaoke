@@ -1,7 +1,7 @@
 import React from 'react';
 
-const EditRoomRoute = () => {
+const EditRoom = () => {
   return <h1>TODO: Edit Room</h1>;
 };
 
-export default EditRoomRoute;
+export default EditRoom;

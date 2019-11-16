@@ -1,7 +1,7 @@
 import React from 'react';
 
-const SearchSongsRoute = () => {
+const SearchSongs = () => {
   return <h1>TODO: Search Songs</h1>;
 };
 
-export default SearchSongsRoute;
+export default SearchSongs;

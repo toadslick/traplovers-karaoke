@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ListRoomsRoute = () => {
+const ListRooms = () => {
   return (
     <>
       <h1>TODO: List Rooms</h1>
@@ -12,4 +12,4 @@ const ListRoomsRoute = () => {
   );
 };
 
-export default ListRoomsRoute;
+export default ListRooms;
