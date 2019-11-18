@@ -8,15 +8,23 @@ const AddSong = ({ firestore, roomId }) => {
   const addSong = e => {
     e.preventDefault();
     const room = firestore.collection('rooms').doc(roomId);
-    room.update({
-      songs: firebase.firestore.FieldValue.arrayUnion(songId),
-    });
+    if (songId.trim()) {
+      room.update({
+        songs: firebase.firestore.FieldValue.arrayUnion(songId),
+      });
+    }
+    setSongId('');
   };
 
   return (
-    <form onChange={e => setSongId(e.target.value)} onSubmit={addSong}>
+    <form onSubmit={addSong}>
       <label>
-        Video ID: <input type="text" />
+        Video ID:
+        <input
+          onChange={e => setSongId(e.target.value)}
+          type="text"
+          value={songId}
+        />
       </label>
       <input type="submit" value="Add Song" />
     </form>
