@@ -1,30 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-firebase';
+import { FirestoreCollection } from 'react-firestore';
+import Loader from '../components/Loader';
 
-const ListRooms = ({ rooms = {} }) => {
-  const listItems = Object.keys(rooms).map(id => {
-    const { name } = rooms[id];
-    return (
-      <li key={id}>
-        <Link to={`/room/${id}`}>{name}</Link>
-      </li>
-    );
-  });
-
+const ListRooms = () => {
   return (
-    <>
-      <h1>List Rooms</h1>
-      <ul>{listItems}</ul>
-      <p>
-        <Link to="/room/new">New Room</Link>
-      </p>
-    </>
+    <FirestoreCollection
+      path={'rooms'}
+      render={({ isLoading, data }) => {
+        return isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <h1>Rooms</h1>
+            <ul>
+              {data.map(({ name, id }) => (
+                <li key={id}>
+                  <Link to={`/room/${id}`}>{name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }}
+    />
   );
 };
 
-const firebaseMap = () => ({
-  rooms: 'rooms',
-});
-
-export default connect(firebaseMap)(ListRooms);
+export default ListRooms;

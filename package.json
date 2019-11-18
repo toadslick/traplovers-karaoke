@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^7.4.0",
+    "@firebase/app": "^0.4.24",
+    "@firebase/auth": "^0.13.0",
+    "@firebase/firestore": "^1.7.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-firebase": "^2.2.8",
+    "react-firestore": "^1.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
