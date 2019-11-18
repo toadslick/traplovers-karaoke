@@ -1,11 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import firebase from '@firebase/app';
+import '@firebase/firestore';
+import '@firebase/auth';
+import { FirestoreProvider } from 'react-firestore';
+
 import App from './App';
-import firebase from 'firebase';
 
-firebase.initializeApp({
-  databaseURL: process.env.REACT_APP_FIREBASE_URL,
-});
+const config = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+};
 
-ReactDOM.render(<App />, document.getElementById('root'));
+firebase.initializeApp(config);
+firebase.auth().signInAnonymously();
+
+ReactDOM.render(
+  <FirestoreProvider firebase={firebase}>
+    <App />
+  </FirestoreProvider>,
+  document.getElementById('root')
+);
