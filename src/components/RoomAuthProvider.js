@@ -2,13 +2,13 @@ import React from 'react';
 import RoomAuthContext from '../contexts/RoomAuth';
 
 const setRoomAuth = (id, password) => {
-  localStorage.set('roomID', id);
-  localStorage.set('roomPassword', password);
+  localStorage.setItem('roomID', id);
+  localStorage.setItem('roomPassword', password);
 };
 
 const getRoomAuth = () => ({
-  id: localStorage.get('roomID'),
-  password: localStorage.get('roomPassword'),
+  id: localStorage.getItem('roomID'),
+  password: localStorage.getItem('roomPassword'),
 });
 
 const RoomAuthProvider = ({ children }) => {

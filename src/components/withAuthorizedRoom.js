@@ -13,7 +13,7 @@ const withAuthorizedRoom = Component => props => {
   const { id: roomId } = useParams();
   const { id: currentId, password: currentPassword } = getRoomAuth();
 
-  const redirect = <Redirect to={`/room/${currentId}/join`} />;
+  const redirect = <Redirect to={`/room/${roomId}/join`} />;
 
   if (roomId !== currentId) {
     return redirect;
