@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 const ListRooms = () => {
   return (
     <FirestoreCollection
-      path={'rooms'}
+      path={'publicRoomListings'}
       render={({ isLoading, data }) => {
         return isLoading ? (
           <Loader />
@@ -14,9 +14,9 @@ const ListRooms = () => {
           <div>
             <h1>Rooms</h1>
             <ul>
-              {data.map(({ name, id }) => (
+              {data.map(({ id, roomName, roomId }) => (
                 <li key={id}>
-                  <Link to={`/room/${id}`}>{name}</Link>
+                  <Link to={`/room/${roomId}`}>{roomName}</Link>
                 </li>
               ))}
             </ul>

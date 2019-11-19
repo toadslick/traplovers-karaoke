@@ -1,6 +1,8 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { FirestoreCollection } from 'react-firestore';
 
+import Loader from '../components/Loader';
 import RoomAuthContext from '../contexts/RoomAuth';
 
 const JoinRoom = () => {
@@ -31,21 +33,35 @@ const JoinRoom = () => {
   }, [inputRef]);
 
   return (
-    <>
-      <h2>Join Room</h2>
-      <form onSubmit={onSubmit}>
-        <label>
-          <span>Enter password:</span>
-          <input
-            onChange={onChange}
-            ref={inputRef}
-            type="text"
-            value={password}
-          />
-        </label>
-        <button>Go</button>
-      </form>
-    </>
+    <FirestoreCollection
+      filter={['roomId', '==', id]}
+      path={'publicRoomListings'}
+      render={({ isLoading, data }) => {
+        if (isLoading) {
+          return <Loader />;
+        }
+
+        const roomName = data[0].roomName;
+
+        return (
+          <>
+            <h2>Join {roomName}</h2>
+            <form onSubmit={onSubmit}>
+              <label>
+                <span>Enter password:</span>
+                <input
+                  onChange={onChange}
+                  ref={inputRef}
+                  type="text"
+                  value={password}
+                />
+              </label>
+              <button>Go</button>
+            </form>
+          </>
+        );
+      }}
+    />
   );
 };
 
