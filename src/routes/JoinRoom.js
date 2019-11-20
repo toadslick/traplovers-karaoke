@@ -1,36 +1,44 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { FirestoreCollection } from 'react-firestore';
+import onInputChange from '../utils/onInputChange';
+import t from '../utils/translate';
 
 import Loader from '../components/Loader';
 import RoomAuthContext from '../contexts/RoomAuth';
 
 const JoinRoom = () => {
+  const { getRoomAuth, setRoomAuth } = useContext(RoomAuthContext);
+  // Begin with the user's previously entered name already filled.
+  const [name, setName] = useState(getRoomAuth().name || '');
   const [password, setPassword] = useState('');
-  const { setRoomAuth } = useContext(RoomAuthContext);
   const { id } = useParams();
   const history = useHistory();
-  const inputRef = useRef(null);
+  const nameInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
 
   // When the form is submitted, set the authorized room's ID and password.
   // If the user got the password wrong, they'll be redirected to this form again.
   const onSubmit = e => {
     e.preventDefault();
-    setRoomAuth(id, password);
+    setRoomAuth(name, id, password);
     history.push(`/room/${id}`);
   };
 
-  const onChange = e => {
-    setPassword(e.target.value);
-  };
-
-  // Focus the input when the form is rendered.
+  // When the form is rendered,
+  // If the user has already entered a name, focus the password input first.
+  // Otherwise, focus the name input first.
   useEffect(() => {
-    const { current: input } = inputRef;
-    if (input) {
-      input.focus();
+    const { current: nameInput } = nameInputRef;
+    const { current: passwordInput } = passwordInputRef;
+    if (nameInput && passwordInput) {
+      if (name) {
+        nameInput.focus();
+      } else {
+        passwordInput.focus();
+      }
     }
-  }, [inputRef]);
+  }, [nameInputRef, passwordInputRef]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <FirestoreCollection
@@ -45,18 +53,27 @@ const JoinRoom = () => {
 
         return (
           <>
-            <h2>Join {roomName}</h2>
+            <h2>{t('joinRoomTitle', roomName)}</h2>
             <form onSubmit={onSubmit}>
               <label>
-                <span>Enter password:</span>
+                <span>{t('joinRoomName')}</span>
                 <input
-                  onChange={onChange}
-                  ref={inputRef}
+                  onChange={onInputChange(setName)}
+                  ref={nameInputRef}
+                  type="text"
+                  value={name}
+                />
+              </label>
+              <label>
+                <span>{t('joinRoomPassword')}</span>
+                <input
+                  onChange={onInputChange(setPassword)}
+                  ref={passwordInputRef}
                   type="text"
                   value={password}
                 />
               </label>
-              <button>Go</button>
+              <button>{t('joinRoomButton')}</button>
             </form>
           </>
         );
