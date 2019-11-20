@@ -27,7 +27,7 @@ const SearchSongs = ({ room }) => {
 
   return (
     <>
-      <h1>{t('searchTitle', room.name)}</h1>
+      <h2>{t('searchTitle', room.name)}</h2>
       <form onSubmit={onSubmit}>
         <label>
           <span>{t('searchLabel')}</span>

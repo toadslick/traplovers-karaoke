@@ -12,7 +12,7 @@ const ListRooms = () => {
           <Loader />
         ) : (
           <>
-            <h1>Rooms</h1>
+            <h2>Rooms</h2>
             <ul>
               {data.map(({ id, roomName, roomId }) => (
                 <li key={id}>
