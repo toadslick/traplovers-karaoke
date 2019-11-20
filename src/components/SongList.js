@@ -5,9 +5,11 @@ const SongList = ({ songs }) => {
     <>
       <h2>Songs</h2>
       <ul>
-        {songs.map(songId => (
-          <li key={songId}>
-            <a href={`https://www.youtube.com/watch?v=${songId}`}>{songId}</a>
+        {songs.map(({ singer, id, title }) => (
+          <li key={id}>
+            <span>{singer}</span>
+            {' - '}
+            <a href={`https://www.youtube.com/watch?v=${id}`}>{title}</a>
           </li>
         ))}
       </ul>

@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import firebase from '@firebase/app';
+import { withFirestore } from 'react-firestore';
+import { useParams, useHistory } from 'react-router-dom';
+import RoomAuthContext from '../contexts/RoomAuth';
 
-const SongSearchListItem = ({ video }) => {
+const SongSearchListItem = ({ firestore, video }) => {
+  const { getRoomAuth } = useContext(RoomAuthContext);
+  const { id: roomId } = useParams();
+  const history = useHistory();
+
   const {
-    id: { videoId: id },
+    id: { videoId },
     snippet: {
       title,
       thumbnails: {
@@ -13,7 +21,15 @@ const SongSearchListItem = ({ video }) => {
 
   const onClick = e => {
     e.preventDefault();
-    console.log('ADD VIDEO', id, title);
+    const room = firestore.collection('rooms').doc(roomId);
+    room.update({
+      songs: firebase.firestore.FieldValue.arrayUnion({
+        singer: getRoomAuth().name,
+        id: videoId,
+        title,
+      }),
+    });
+    history.push(`/room/${roomId}`);
   };
 
   return (
@@ -32,4 +48,4 @@ const SongSearchListItem = ({ video }) => {
   );
 };
 
-export default SongSearchListItem;
+export default withFirestore(SongSearchListItem);
