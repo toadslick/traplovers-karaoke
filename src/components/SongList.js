@@ -1,17 +1,19 @@
 import React from 'react';
+import Unescape from './Unescape';
 
 const SongList = ({ songs }) => {
   return (
-    <>
-      <h2>Songs</h2>
-      <ul>
-        {songs.map(songId => (
-          <li key={songId}>
-            <a href={`https://www.youtube.com/watch?v=${songId}`}>{songId}</a>
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul>
+      {songs.map(({ singer, id, title }) => (
+        <li key={id}>
+          <span>{singer}</span>
+          {' - '}
+          <a href={`https://www.youtube.com/watch?v=${id}`}>
+            <Unescape>{title}</Unescape>
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 };
 export default SongList;

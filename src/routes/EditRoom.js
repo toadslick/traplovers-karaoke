@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EditRoom = () => {
-  return <h1>TODO: Edit Room</h1>;
+  return <h2>TODO: Edit Room</h2>;
 };
 
 export default EditRoom;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Playing = () => {
-  return <h1>TODO: currently playing video</h1>;
+  return <h2>TODO: currently playing video</h2>;
 };
 
 export default Playing;
