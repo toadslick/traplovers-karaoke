@@ -11,7 +11,7 @@ const ListRooms = () => {
         return isLoading ? (
           <Loader />
         ) : (
-          <div>
+          <>
             <h1>Rooms</h1>
             <ul>
               {data.map(({ id, roomName, roomId }) => (
@@ -20,7 +20,7 @@ const ListRooms = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </>
         );
       }}
     />
