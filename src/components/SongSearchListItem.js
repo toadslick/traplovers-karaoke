@@ -3,6 +3,7 @@ import firebase from '@firebase/app';
 import { withFirestore } from 'react-firestore';
 import { useParams, useHistory } from 'react-router-dom';
 import RoomAuthContext from '../contexts/RoomAuth';
+import Unescape from './Unescape';
 
 const SongSearchListItem = ({ firestore, video }) => {
   const { getRoomAuth } = useContext(RoomAuthContext);
@@ -42,7 +43,7 @@ const SongSearchListItem = ({ firestore, video }) => {
           src={thumbUrl}
           width={thumbWidth}
         />
-        <span>{title}</span>
+        <Unescape>{title}</Unescape>
       </button>
     </li>
   );
