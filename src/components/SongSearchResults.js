@@ -3,6 +3,7 @@ import { connect } from 'react-refetch';
 
 import Loader from './Loader';
 import SongSearchListItem from './SongSearchListItem';
+import getSecret from '../utils/getSecret';
 
 const SongSearchList = ({ resultsFetch }) => {
   if (resultsFetch) {
@@ -34,7 +35,7 @@ const buildFetchRequest = query => {
   const trimmedQuery = query.trim();
   if (trimmedQuery) {
     const escapedQuery = encodeURI(`karaoke ${trimmedQuery}`);
-    const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+    const apiKey = getSecret('youtubeApiKey');
     // If react-refetch receives an object with `{ url, headers, etc }`
     // then it will make that HTTP request.
     return {
