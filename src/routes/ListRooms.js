@@ -4,26 +4,23 @@ import { FirestoreCollection } from 'react-firestore';
 import Loader from '../components/Loader';
 
 const ListRooms = () => {
+  const renderRoomList = ({ id, roomName, roomId }) => (
+    <li key={id}>
+      <Link to={`/room/${roomId}`}>{roomName}</Link>
+    </li>
+  );
+
   return (
-    <FirestoreCollection
-      path={'publicRoomListings'}
-      render={({ isLoading, data }) => {
-        return isLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <h2>Rooms</h2>
-            <ul>
-              {data.map(({ id, roomName, roomId }) => (
-                <li key={id}>
-                  <Link to={`/room/${roomId}`}>{roomName}</Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        );
-      }}
-    />
+    <>
+      <h2>Rooms</h2>
+      <FirestoreCollection
+        path={'publicRoomListings'}
+        render={({ isLoading, data }) => {
+          return isLoading ? <Loader /> : <ul>{data.map(renderRoomList)}</ul>;
+        }}
+        sort="sortKey"
+      />
+    </>
   );
 };
 
