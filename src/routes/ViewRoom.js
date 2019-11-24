@@ -4,14 +4,10 @@ import SongList from '../components/SongList';
 import { Link } from 'react-router-dom';
 import t from '../utils/translate';
 
-const ViewRoom = ({ room: { id, name, songs } }) => (
+const ViewRoom = ({ room: { id, name } }) => (
   <>
     <h2>{name}</h2>
-    {songs && songs.length ? (
-      <SongList songs={songs} />
-    ) : (
-      <p>{t('songsEmptySet')}</p>
-    )}
+    <SongList roomId={id} />
     <Link to={`/room/${id}/search`}>{t('addSong')}</Link>
   </>
 );
