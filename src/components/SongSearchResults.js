@@ -19,9 +19,11 @@ const SongSearchList = ({ resultsFetch }) => {
     } else if (fulfilled && value.items && value.items.length) {
       return (
         <ul>
-          {value.items.map(video => (
-            <SongSearchListItem key={video.id.videoId} video={video} />
-          ))}
+          {value.items.map(({ id: { videoId }, snippet: { title } }) => {
+            return (
+              <SongSearchListItem key={videoId} title={title} ytId={videoId} />
+            );
+          })}
         </ul>
       );
     }

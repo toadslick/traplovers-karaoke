@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
 import SongSearchResults from '../components/SongSearchResults';
 import t from '../utils/translate';
 
-const SearchSongs = ({ room }) => {
+const SearchSongs = ({ room: { name: roomName, id: roomId } }) => {
   const inputRef = useRef(null);
   const [query, setQuery] = useState('');
   const [submittedQuery, setSubmittedQuery] = useState(query);
@@ -27,7 +28,7 @@ const SearchSongs = ({ room }) => {
 
   return (
     <>
-      <h2>{t('searchTitle', room.name)}</h2>
+      <h2>{t('searchTitle', roomName)}</h2>
       <form onSubmit={onSubmit}>
         <label>
           <span>{t('searchLabel')}</span>
@@ -41,6 +42,9 @@ const SearchSongs = ({ room }) => {
         <button>{t('searchButton')}</button>
       </form>
       <SongSearchResults query={submittedQuery} />
+      <p>
+        <Link to={`/room/${roomId}`}>{t('cancel')}</Link>
+      </p>
     </>
   );
 };

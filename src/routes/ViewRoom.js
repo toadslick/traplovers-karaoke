@@ -8,7 +8,12 @@ const ViewRoom = ({ room: { id, name } }) => (
   <>
     <h2>{name}</h2>
     <SongList roomId={id} />
-    <Link to={`/room/${id}/search`}>{t('addSong')}</Link>
+    <p>
+      <Link to={`/room/${id}/search`}>{t('roomAddSong')}</Link>
+    </p>
+    <p>
+      <Link to={`/room/${id}/favorites`}>{t('roomAddFavorite')}</Link>
+    </p>
   </>
 );
 
