@@ -8563,6 +8563,13 @@ react-refetch@^3.0.1:
     invariant "^2.2.4"
     warning "^4.0.3"
 
+react-robot@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-robot/-/react-robot-0.2.1.tgz#5615a13a9c5bddd663fbd5973790ba3e408368b0"
+  integrity sha512-ULQC0wRqOpScl8wUVs/q9fv7skMFPx3Wm1uq1qjeLJs6+CTbhNS4+yq+2TbI43nbkPC3zYMX80CQcXeV4XW4rw==
+  dependencies:
+    robot-hooks "^0.3.1"
+
 react-router-dom@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.1.2.tgz#06701b834352f44d37fbb6311f870f84c76b9c18"
@@ -9037,6 +9044,16 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+robot-hooks@^0.3.1:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/robot-hooks/-/robot-hooks-0.3.2.tgz#3f27edffc56e2bd2f89de66bbcbc7602c4a86f2d"
+  integrity sha512-/yPP4vdlMasf7E61/k2tuKZjMw73U22z6yTlk3aJxpVIkLmyuQSonvsZsXqEJZyy8Tud5qxlS2aDYPqvA3zw7Q==
+
+robot3@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/robot3/-/robot3-0.2.9.tgz#81b0f0f8ea2afe1723577d622f0dec4e97415bf9"
+  integrity sha512-rzF8mh5ohWxkRCQvoCFzNRH3u5AYENTsIN1qmIEhTUrOEHubdizgnXOuZEFhWAo61abpZ2OHAxMGUGOHhGSM8w==
 
 rsvp@^4.8.4:
   version "4.8.5"
