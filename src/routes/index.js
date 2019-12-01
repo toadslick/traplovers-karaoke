@@ -4,6 +4,7 @@ import JoinRoom from './JoinRoom';
 import ListRooms from './ListRooms';
 import ViewRoom from './ViewRoom';
 import SearchSongs from './SearchSongs';
+import FavoriteSongs from './FavoriteSongs';
 import Playing from './Playing';
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
   { Component: Playing, path: '/room/:id/playing' },
   { Component: EditRoom, path: '/room/:id/edit' },
   { Component: SearchSongs, path: '/room/:id/search' },
+  { Component: FavoriteSongs, path: '/room/:id/favorites' },
 ];
 
 export default routes;

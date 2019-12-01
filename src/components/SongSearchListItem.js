@@ -3,28 +3,19 @@ import { withFirestore } from 'react-firestore';
 import { useParams, useHistory } from 'react-router-dom';
 import RoomAuthContext from '../contexts/RoomAuth';
 import Unescape from './Unescape';
-import { HD_VIDEO_RATIO } from '../utils/constants';
+import YouTubeThumbnail from './YouTubeThumbnail';
+import FavoriteToggle from './FavoriteToggle';
 
-const SongSearchListItem = ({ firestore, video }) => {
+const SongSearchListItem = ({ firestore, ytId, title }) => {
   const { getRoomAuth } = useContext(RoomAuthContext);
   const { id: roomId } = useParams();
   const history = useHistory();
-
-  const {
-    id: { videoId },
-    snippet: {
-      title,
-      thumbnails: {
-        default: { url: thumbUrl, width: thumbWidth },
-      },
-    },
-  } = video;
 
   const onClick = e => {
     e.preventDefault();
     firestore.collection(`rooms/${roomId}/songs`).add({
       singer: getRoomAuth().name,
-      ytId: videoId,
+      ytId,
       created: Date.now(),
       title,
     });
@@ -39,16 +30,10 @@ const SongSearchListItem = ({ firestore, video }) => {
   return (
     <li>
       <button onClick={onClick}>
-        <img
-          alt=""
-          aria-hidden="true"
-          height={thumbWidth * HD_VIDEO_RATIO}
-          src={thumbUrl}
-          style={{ objectFit: 'cover' }}
-          width={thumbWidth}
-        />
+        <YouTubeThumbnail ytId={ytId} />
         <Unescape>{title}</Unescape>
       </button>
+      <FavoriteToggle title={title} ytId={ytId} />
     </li>
   );
 };

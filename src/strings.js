@@ -1,6 +1,8 @@
 export default {
+  cancel: 'Cancel',
   songsEmptySet: 'Your playlist is empty.',
-  addSong: 'Add song',
+  roomAddSong: 'Add song',
+  roomAddFavorite: 'Add favorite',
   songSearch: 'Search Videos',
   searchTitle: roomName => `Add song to ${roomName}`,
   searchLabel: 'Search YouTube videos',
@@ -9,4 +11,6 @@ export default {
   joinRoomName: 'Name',
   joinRoomPassword: 'Password',
   joinRoomButton: 'Join',
+  favoritesTitle: 'Favorites',
+  favoritesEmpty: "You don't have any favorite videos.",
 };

@@ -1,7 +1,7 @@
 import React from 'react';
-import Unescape from './Unescape';
 import { FirestoreCollection } from 'react-firestore';
 import Loader from './Loader';
+import SongListItem from './SongListItem';
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
 import t from '../utils/translate';
 
@@ -12,25 +12,14 @@ const SongList = ({ roomId }) => {
       render={({ isLoading, data }) => {
         return isLoading ? (
           <Loader />
+        ) : data.length ? (
+          <ul>
+            {data.map(props => (
+              <SongListItem {...props} key={props.id} />
+            ))}
+          </ul>
         ) : (
-          <>
-            <h2>Songs</h2>
-            {data.length ? (
-              <ul>
-                {data.map(({ singer, title, ytId, id }) => (
-                  <li key={id}>
-                    <span>{singer}</span>
-                    {' - '}
-                    <a href={`https://www.youtube.com/watch?v=${ytId}`}>
-                      <Unescape>{title}</Unescape>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>{t('songsEmptySet')}</p>
-            )}
-          </>
+          <p>{t('songsEmptySet')}</p>
         );
       }}
       sort="created"
