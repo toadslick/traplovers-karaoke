@@ -13,4 +13,5 @@ export default {
   joinRoomButton: 'Join',
   favoritesTitle: 'Favorites',
   favoritesEmpty: "You don't have any favorite videos.",
+  addRoomLink: 'Add Room',
 };
