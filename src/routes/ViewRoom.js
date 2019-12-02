@@ -9,6 +9,9 @@ const ViewRoom = ({ room: { id, name } }) => (
     <h2>{name}</h2>
     <SongList roomId={id} />
     <p>
+      <Link to={`/room/${id}/play`}>{t('roomTvView')}</Link>
+    </p>
+    <p>
       <Link to={`/room/${id}/search`}>{t('roomAddSong')}</Link>
     </p>
     <p>

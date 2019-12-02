@@ -3,6 +3,7 @@ export default {
   songsEmptySet: 'Your playlist is empty.',
   roomAddSong: 'Add song',
   roomAddFavorite: 'Add favorite',
+  roomTvView: 'TV mode',
   songSearch: 'Search Videos',
   searchTitle: roomName => `Add song to ${roomName}`,
   searchLabel: 'Search YouTube videos',
