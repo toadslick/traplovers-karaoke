@@ -32,8 +32,8 @@ const ProgressCircle = ({
           fill="none"
           r={radius - strokeWidth / 2}
           stroke={primaryColor}
-          stroke-linecap="round"
           strokeDasharray={perimeter}
+          strokeLinecap="round"
           strokeWidth={strokeWidth}
           style={{
             strokeDashoffset: enabled
@@ -49,7 +49,7 @@ const ProgressCircle = ({
 
 ProgressCircle.defaultProps = {
   radius: 100,
-  strokeWidth: 6,
+  strokeWidth: 10,
   secondaryColor: '#ccc',
   primaryColor: '#000',
   enabled: true,
