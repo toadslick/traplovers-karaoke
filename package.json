@@ -6,12 +6,15 @@
     "@firebase/app": "^0.4.24",
     "@firebase/auth": "^0.13.0",
     "@firebase/firestore": "^1.7.1",
+    "@xstate/react": "^0.8.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-firestore": "^1.0.1",
     "react-refetch": "^3.0.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "react-youtube": "^7.9.0",
+    "xstate": "^4.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
