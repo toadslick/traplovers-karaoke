@@ -4,6 +4,7 @@ import { useMachine } from '@xstate/react';
 import YouTube from 'react-youtube';
 
 import Unescape from '../components/Unescape';
+import ProgressCircle from '../components/ProgressCircle';
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
 import karaokeMachine from '../services/karaoke';
 
@@ -23,27 +24,30 @@ const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
     context: { currentSong, songs, segueProgress },
   } = current;
 
+  const videoStyle =
+    state === 'video' ? {} : { position: 'absolute', left: -9999 };
+
   return (
     <>
       <h2>State</h2>
       <p>{state}</p>
 
-      <h2>
-        {state === 'segue'
-          ? `Up Next - ${Math.floor(segueProgress * 100)}%`
-          : 'Now Playing'}
-      </h2>
+      <h2>{state === 'segue' ? `Up Next` : 'Now Playing'}</h2>
       {currentSong ? <Song {...currentSong} /> : <p>no songs</p>}
 
-      <YouTube
-        onReady={({ target }) => send({ type: 'READY', player: target })}
-        opts={{
-          controls: 0,
-          disablekb: 1,
-          enablejsapi: 1,
-          modestbranding: 1,
-        }}
-      />
+      {state === 'segue' && <ProgressCircle percent={segueProgress} />}
+
+      <div style={videoStyle}>
+        <YouTube
+          onReady={({ target }) => send({ type: 'READY', player: target })}
+          opts={{
+            controls: 0,
+            disablekb: 1,
+            enablejsapi: 1,
+            modestbranding: 1,
+          }}
+        />
+      </div>
 
       <h2>Song Queue</h2>
       {songs.map(Song)}
