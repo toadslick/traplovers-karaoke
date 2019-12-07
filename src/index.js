@@ -8,6 +8,8 @@ import { FirestoreProvider } from 'react-firestore';
 import getSecret from './utils/getSecret';
 import App from './App';
 
+import './index.scss';
+
 const config = {
   apiKey: getSecret('firebaseApiKey'),
   projectId: getSecret('firebaseProjectId'),
