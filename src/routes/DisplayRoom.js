@@ -8,14 +8,6 @@ import ProgressCircle from '../components/ProgressCircle';
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
 import karaokeMachine from '../services/karaoke';
 
-const Song = ({ singer, ytId, title, id }) => (
-  <p key={id}>
-    {singer} - {ytId}
-    <br />
-    <Unescape>{title}</Unescape>
-  </p>
-);
-
 const iframeParams = {
   controls: 0,
   disablekb: 1,
@@ -23,37 +15,85 @@ const iframeParams = {
   modestbranding: 1,
 };
 
-const videoStyles = state => {
-  switch (state) {
-    case 'video':
-      return {
-        position: 'fixed',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-      };
-    default:
-      return {
-        position: 'absolute',
-        left: -9999,
-      };
-  }
+const MARQUEE_HEIGHT = 50;
+
+const videoStyles = {
+  position: 'fixed',
+  top: 0,
+  bottom: MARQUEE_HEIGHT,
+  left: 0,
+  right: 0,
 };
 
-const videoCoverStyles = {
+const coverStyles = {
   position: 'absolute',
   top: 0,
   bottom: 0,
   left: 0,
   right: 0,
-  zIndex: 2,
 };
 
-const getChildState = (state, service) => {
-  const child = service.children.get(state);
-  return child && child.state.value;
+const screenStyles = {
+  position: 'fixed',
+  top: 0,
+  bottom: MARQUEE_HEIGHT,
+  left: 0,
+  right: 0,
+  background: '#000',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#fff',
 };
+
+const segueSingerStyles = {
+  fontWeight: 600,
+  fontSize: 80,
+  whiteSpace: 'nowrap',
+  paddingRight: 50,
+  paddingLeft: 50,
+  textOverflow: 'ellipsis',
+  textAlign: 'center',
+};
+
+const segueSongStyles = {
+  fontWeight: 400,
+  fontSize: 50,
+  padding: 50,
+  textAlign: 'center',
+};
+
+const marqueeStyles = {
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: MARQUEE_HEIGHT,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  overflow: 'hidden',
+  margin: 0,
+  padding: 0,
+  background: '#666',
+  listStyleType: 'none',
+  whiteSpace: 'nowrap',
+  fontSize: 30,
+  fontWeight: 600,
+  color: '#fff',
+};
+
+const marqueeItemStyles = {
+  marginLeft: 40,
+};
+
+const progressStyles = substate => ({
+  transition: 'transform 1s, opacity 1s',
+  transformOrigin: '50% 50%',
+  transform: `scale(${substate === 'buffering' ? 1.5 : 1})`,
+  opacity: substate === 'buffering' ? 0 : 1,
+});
 
 const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
   const [current, send, service] = useMachine(
@@ -65,24 +105,22 @@ const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
     context: { currentSong, songs, segueProgress },
   } = current;
 
-  const togglePlay = useCallback(() => {
-    const childState = getChildState(state, service);
-    if (childState === 'playing') {
-      send('PAUSE');
-    } else if (childState === 'paused') {
-      send('PLAY');
-    }
-  }, [send, service, state]);
+  const submachine = service.children.get(state);
+  const substate = submachine && submachine.state.value;
 
   const onKeyDown = useCallback(
     ({ key }) => {
       if (key === ' ') {
-        togglePlay();
+        if (substate === 'playing') {
+          send('PAUSE');
+        } else if (substate === 'paused') {
+          send('PLAY');
+        }
       } else if (key === 'ArrowRight') {
         send('NEXT_SONG');
       }
     },
-    [send, togglePlay]
+    [send, substate]
   );
 
   useEffect(() => {
@@ -94,24 +132,7 @@ const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
 
   return (
     <>
-      <h2>State</h2>
-      <p>
-        {state} > {getChildState(state, service)}
-      </p>
-
-      <h2>{state === 'segue' ? `Up Next` : 'Now Playing'}</h2>
-      {currentSong ? <Song {...currentSong} /> : <p>no songs</p>}
-
-      {state === 'segue' && <ProgressCircle percent={segueProgress} />}
-
-      <div style={videoStyles(state)}>
-        <div
-          onClick={togglePlay}
-          onKeyDown={() => {}}
-          role="button"
-          style={videoCoverStyles}
-          tabIndex={0}
-        />
+      <div style={videoStyles}>
         <YouTube
           className="youtube"
           containerClassName="youtube"
@@ -120,14 +141,44 @@ const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
         />
       </div>
 
-      <h2>Song Queue</h2>
-      {songs.map(Song)}
+      <ol style={marqueeStyles}>
+        {songs.map(({ id, singer }, index) => (
+          <li key={id} style={marqueeItemStyles}>
+            {index === 0 ? 'Next' : index}: {singer}
+          </li>
+        ))}
+      </ol>
 
-      <fieldset>
-        <button onClick={() => send('PLAY')}>Play</button>
-        <button onClick={() => send('PAUSE')}>Pause</button>
-        <button onClick={() => send('NEXT_SONG')}>Next</button>
-      </fieldset>
+      {(state === 'segue' || substate === 'buffering') && (
+        <div style={screenStyles}>
+          <div style={segueSingerStyles}>{currentSong.singer}</div>
+          <div style={segueSongStyles}>
+            <Unescape>{currentSong.title}</Unescape>
+          </div>
+          <div style={progressStyles(substate)}>
+            <ProgressCircle percent={segueProgress} />
+          </div>
+        </div>
+      )}
+
+      {state === 'empty' && (
+        <div style={screenStyles}>
+          <div style={segueSongStyles}>No Songs</div>
+        </div>
+      )}
+
+      {state === 'loading' && (
+        <div style={screenStyles}>
+          <div style={segueSongStyles}>Loading</div>
+        </div>
+      )}
+
+      <div
+        onClick={() => {}}
+        onKeyDown={() => {}}
+        role="presentation"
+        style={coverStyles}
+      />
     </>
   );
 };

@@ -12,8 +12,19 @@ const CONFIG = {
     start: {
       on: {
         '': {
-          target: 'playing',
+          target: 'buffering',
           actions: 'playVideo',
+        },
+      },
+    },
+
+    // The "buffering" state only exists during the very first time a
+    // video is being buffered by YouTube. By having its own named state,
+    // the segue can continue to be show until the video is done buffering.
+    buffering: {
+      on: {
+        PLAYER_PLAYING: {
+          target: 'playing',
         },
       },
     },

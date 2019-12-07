@@ -6,12 +6,17 @@ const ProgressCircle = ({
   strokeWidth,
   secondaryColor,
   primaryColor,
-  enabled,
 }) => {
   const diameter = radius * 2;
   const perimeter = diameter * Math.PI;
   return (
-    <div style={{ width: diameter, height: diameter }}>
+    <div
+      style={{
+        width: diameter,
+        height: diameter,
+        transform: `rotate(-90deg)`,
+      }}
+    >
       <svg
         height={diameter}
         viewBox={`0 0 ${diameter} ${diameter}`}
@@ -24,7 +29,7 @@ const ProgressCircle = ({
           fill="none"
           r={radius - strokeWidth / 2}
           stroke={secondaryColor}
-          strokeWidth={strokeWidth / 2}
+          strokeWidth={strokeWidth}
         />
         <circle
           cx={radius}
@@ -33,13 +38,10 @@ const ProgressCircle = ({
           r={radius - strokeWidth / 2}
           stroke={primaryColor}
           strokeDasharray={perimeter}
-          strokeLinecap="round"
           strokeWidth={strokeWidth}
           style={{
-            strokeDashoffset: enabled
-              ? perimeter - perimeter * Math.min(1, percent)
-              : perimeter,
-            transition: enabled ? 'stroke-dashoffset 0.3s' : '',
+            strokeDashoffset: perimeter - perimeter * Math.min(1, percent),
+            transition: 'stroke-dashoffset 0.3s',
           }}
         />
       </svg>
@@ -48,11 +50,10 @@ const ProgressCircle = ({
 };
 
 ProgressCircle.defaultProps = {
-  radius: 100,
-  strokeWidth: 10,
-  secondaryColor: '#ccc',
-  primaryColor: '#000',
-  enabled: true,
+  radius: 50,
+  strokeWidth: 4,
+  secondaryColor: '#444',
+  primaryColor: '#fff',
 };
 
 export default ProgressCircle;

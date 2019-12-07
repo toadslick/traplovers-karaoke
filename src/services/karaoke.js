@@ -107,6 +107,9 @@ const CONFIG = {
         PLAYER_PAUSED: {
           actions: forwardTo('video'),
         },
+        PLAYER_BUFFERING: {
+          actions: forwardTo('video'),
+        },
       },
     },
 
