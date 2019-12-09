@@ -12,6 +12,7 @@ export default {
   joinRoomName: 'Name',
   joinRoomPassword: 'Password',
   joinRoomButton: 'Join',
+  animalName: animal => `Anonymous ${animal}`,
   favoritesTitle: 'Favorites',
   favoritesEmpty: "You don't have any favorite videos.",
   addRoomLink: 'Add Room',

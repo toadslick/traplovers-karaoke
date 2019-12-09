@@ -23,4 +23,3 @@ These must be defined in a `.env.local` file, which should not be committed to t
 - lazy loading of routes via `React.Suspense`
 - build and deploy script
 - host remotely via `gh-pages` branch
-- cute randomized names for anonymous singers, such as "Anonymous Giraffe"
