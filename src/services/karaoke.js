@@ -144,6 +144,13 @@ const CONFIG = {
         },
       },
     },
+
+    // Moving this machine to a final state should cause any invoked
+    // machines to call their cleanup callbacks. This state should
+    // only be entered when leaving the DisplayRoom route.
+    done: {
+      type: 'final',
+    },
   },
 
   invoke: [
@@ -166,6 +173,9 @@ const CONFIG = {
     //send the UPDATE_SONGS event. Store the new list of songs in the context.
     UPDATE_SONGS: {
       actions: assign({ songs: (_, { songs }) => songs }),
+    },
+    DONE: {
+      target: 'done',
     },
   },
 };

@@ -9,7 +9,6 @@ These must be defined in a `.env.local` file, which should not be committed to t
 ## To Do
 
 - edit or delete room
-- `DisplayRoom` route: send `DONE` command to state machine when de-rendering route to unsubscribe event listeners
 - `DisplayRoom` route: control bar visible during mouseover
   - play or pause
   - next song

@@ -130,6 +130,14 @@ const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
     };
   }, [onKeyDown]);
 
+  // When the component is de-rendered, send the 'DONE' event to the machine.
+  // This event should cause the machine to unsubscribe from any listeners.
+  useEffect(() => {
+    return () => {
+      send('DONE');
+    };
+  }, [send]);
+
   return (
     <>
       <div style={videoStyles}>
