@@ -16,4 +16,8 @@ export default {
   favoritesTitle: 'Favorites',
   favoritesEmpty: "You don't have any favorite videos.",
   addRoomLink: 'Add Room',
+  play: 'Play Song',
+  pause: 'Pause Song',
+  nextSong: 'Next Song',
+  exitRoom: 'Exit Room',
 };

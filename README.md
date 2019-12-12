@@ -9,10 +9,6 @@ These must be defined in a `.env.local` file, which should not be committed to t
 ## To Do
 
 - edit or delete room
-- `DisplayRoom` route: control bar visible during mouseover
-  - play or pause
-  - next song
-  - exit TV view
 - send `PLAY`, `PAUSE`, and `NEXT_SONG` commands from other device
   - maybe possible with Firestore collection listener?
 - indeterminate loading spinner
