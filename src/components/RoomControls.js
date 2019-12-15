@@ -26,9 +26,15 @@ const styles = {
 const RoomControls = ({ firestore, roomId }) => {
   const onClick = command => event => {
     event.preventDefault();
-    firestore.collection(`rooms/${roomId}/commands`).add({
-      key: command,
-      created: Date.now(),
+    const collection = firestore.collection(`rooms/${roomId}/commands`);
+    collection.get().then(snapshot => {
+      snapshot.docs.map(({ id }) => {
+        collection.doc(id).delete();
+      });
+      collection.add({
+        key: command,
+        created: Date.now(),
+      });
     });
   };
 
