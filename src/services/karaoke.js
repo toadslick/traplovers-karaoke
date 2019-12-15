@@ -181,8 +181,8 @@ const CONFIG = {
 };
 
 const playerMachine = (firestore, roomId) => {
-  const collection = firestore.collection(`rooms/${roomId}/songs`);
-  const query = collection.orderBy('created');
+  const songCollection = firestore.collection(`rooms/${roomId}/songs`);
+  const songQuery = songCollection.orderBy('created');
 
   return Machine(CONFIG, {
     actions: {
@@ -192,7 +192,7 @@ const playerMachine = (firestore, roomId) => {
         currentSong: ({ songs }) => {
           const nextSong = songs.shift();
           if (nextSong && nextSong.id) {
-            collection.doc(nextSong.id).delete();
+            songCollection.doc(nextSong.id).delete();
           }
           return nextSong;
         },
@@ -215,7 +215,7 @@ const playerMachine = (firestore, roomId) => {
     services: {
       segue: segueMachine,
       video: videoMachine,
-      songs: songsService(query),
+      songs: songsService(songQuery),
       player: playerService,
     },
   });

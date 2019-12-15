@@ -1,6 +1,7 @@
 import React from 'react';
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
 import SongList from '../components/SongList';
+import RoomControls from '../components/RoomControls';
 import { Link } from 'react-router-dom';
 import t from '../utils/translate';
 
@@ -8,6 +9,7 @@ const ViewRoom = ({ room: { id, name } }) => (
   <>
     <h2>{name}</h2>
     <SongList roomId={id} />
+    <RoomControls roomId={id} />
     <p>
       <Link to={`/room/${id}/play`}>{t('roomTvView')}</Link>
     </p>
