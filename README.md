@@ -11,6 +11,7 @@ These must be defined in a `.env.local` file, which should not be committed to t
 - edit or delete room
 - send `PLAY`, `PAUSE`, and `NEXT_SONG` commands from other device
   - maybe possible with Firestore collection listener?
+- Only one computer can do TV view
 - indeterminate loading spinner
 - how to organize styles: `styled-components` or `emotion` libraries?
 - set secrets via URL query params
@@ -18,3 +19,6 @@ These must be defined in a `.env.local` file, which should not be committed to t
 - lazy loading of routes via `React.Suspense`
 - build and deploy script
 - host remotely via `gh-pages` branch
+- Your history can be shown based on songs played documents from firebase
+
+Every person in the room will have a play and pause button regardless of the state of the room
