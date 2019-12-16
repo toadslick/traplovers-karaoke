@@ -212,22 +212,26 @@ const DisplayRoom = ({ firestore, room: { id: roomId } }) => {
       <OnMouseMove bounceDuration={2000}>
         {didMove => (
           <div style={styles.controlPanel(didMove)}>
-            <button
-              aria-label={t('play')}
-              onClick={() => send('PLAY')}
-              style={styles.button}
-              type="button"
-            >
-              <span aria-hidden="true">▶️</span>
-            </button>
-            <button
-              aria-label={t('pause')}
-              onClick={() => send('PAUSE')}
-              style={styles.button}
-              type="button"
-            >
-              <span aria-hidden="true">⏸</span>
-            </button>
+            {substate === 'paused' && (
+              <button
+                aria-label={t('play')}
+                onClick={() => send('PLAY')}
+                style={styles.button}
+                type="button"
+              >
+                <span aria-hidden="true">▶️</span>
+              </button>
+            )}
+            {substate === 'playing' && (
+              <button
+                aria-label={t('pause')}
+                onClick={() => send('PAUSE')}
+                style={styles.button}
+                type="button"
+              >
+                <span aria-hidden="true">⏸</span>
+              </button>
+            )}
             <button
               aria-label={t('nextSong')}
               onClick={() => send('NEXT_SONG')}
