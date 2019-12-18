@@ -28,9 +28,7 @@ const RoomControls = ({ firestore, roomId }) => {
     event.preventDefault();
     const collection = firestore.collection(`rooms/${roomId}/commands`);
     collection.get().then(snapshot => {
-      snapshot.docs.map(({ id }) => {
-        collection.doc(id).delete();
-      });
+      snapshot.docs.map(({ id }) => collection.doc(id).delete());
       collection.add({
         key: command,
         created: Date.now(),
