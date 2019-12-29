@@ -6,10 +6,10 @@ import Header from './components/Header';
 const App = () => (
   <BrowserRouter>
     <Header />
-    <main>
+    <main style={{ background: '#000' }}>
       <Switch>
-        {routes.map(({ Component, path }) => (
-          <Route exact={true} key={path} path={path}>
+        {routes.map(({ Component, path, exact }) => (
+          <Route exact={exact} key={path} path={path}>
             <Component />
           </Route>
         ))}

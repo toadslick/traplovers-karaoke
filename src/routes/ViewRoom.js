@@ -1,25 +1,29 @@
-import React from 'react';
+/** @jsx jsx */
+
+import { Fragment } from 'react';
+import { jsx } from '@emotion/core';
+
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
 import SongList from '../components/SongList';
+import Title from '../components/Title';
 import RoomControls from '../components/RoomControls';
 import { Link } from 'react-router-dom';
 import t from '../utils/translate';
+import { titleLinkCss } from '../styles';
 
 const ViewRoom = ({ room: { id, name } }) => (
-  <>
-    <h2>{name}</h2>
+  <Fragment>
+    <Title text={name}>
+      <Link css={titleLinkCss} to={`/room/${id}/song/search`}>
+        {t('roomAddSong')}
+      </Link>
+    </Title>
     <SongList roomId={id} />
     <RoomControls roomId={id} />
     <p>
       <Link to={`/room/${id}/play`}>{t('roomTvView')}</Link>
     </p>
-    <p>
-      <Link to={`/room/${id}/search`}>{t('roomAddSong')}</Link>
-    </p>
-    <p>
-      <Link to={`/room/${id}/favorites`}>{t('roomAddFavorite')}</Link>
-    </p>
-  </>
+  </Fragment>
 );
 
 export default withAuthorizedRoom(ViewRoom);

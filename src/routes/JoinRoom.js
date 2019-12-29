@@ -5,6 +5,7 @@ import onInputChange from '../utils/onInputChange';
 import t from '../utils/translate';
 
 import Loader from '../components/Loader';
+import Title from '../components/Title';
 import RoomAuthContext from '../contexts/RoomAuth';
 
 const JoinRoom = () => {
@@ -53,7 +54,7 @@ const JoinRoom = () => {
 
         return (
           <>
-            <h2>{t('joinRoomTitle', roomName)}</h2>
+            <Title text={t('joinRoomTitle', roomName)} />
             <form onSubmit={onSubmit}>
               <label>
                 <span>{t('joinRoomName')}</span>

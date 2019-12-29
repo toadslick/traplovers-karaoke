@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Title from '../components/Title';
+
 const EditRoom = () => {
-  return <h2>TODO: Edit Room</h2>;
+  return <Title text="TODO: Edit Room" />;
 };
 
 export default EditRoom;
