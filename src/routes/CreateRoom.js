@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+
+import { jsx } from '@emotion/core';
+import { Link, useHistory } from 'react-router-dom';
+import { Fragment, useState } from 'react';
 import { withFirestore } from 'react-firestore';
-import { useHistory } from 'react-router-dom';
+
+import Title from '../components/Title';
+import t from '../utils/translate';
+import { titleLinkCancelCss } from '../styles';
 
 const CreateRoom = ({ firestore }) => {
   const [name, setName] = useState('');
@@ -51,25 +58,32 @@ const CreateRoom = ({ firestore }) => {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <label>
-        Name:
-        <input
-          onChange={e => setName(e.target.value)}
-          type="text"
-          value={name}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          onChange={e => setPassword(e.target.value)}
-          type="text"
-          value={password}
-        />
-      </label>
-      <button>Submit</button>
-    </form>
+    <Fragment>
+      <Title text={t('createRoomTitle')}>
+        <Link css={titleLinkCancelCss} to={`/`}>
+          {t('cancel')}
+        </Link>
+      </Title>
+      <form onSubmit={onFormSubmit}>
+        <label>
+          Name:
+          <input
+            onChange={e => setName(e.target.value)}
+            type="text"
+            value={name}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            onChange={e => setPassword(e.target.value)}
+            type="text"
+            value={password}
+          />
+        </label>
+        <button>Submit</button>
+      </form>
+    </Fragment>
   );
 };
 

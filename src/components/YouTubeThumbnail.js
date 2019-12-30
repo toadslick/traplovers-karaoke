@@ -3,11 +3,12 @@
 import { css, jsx } from '@emotion/core';
 
 import { HD_VIDEO_RATIO } from '../utils/constants';
+import { listBorder } from '../styles';
 
 const imgCss = css`
   object-fit: cover;
   flex-shrink: 0;
-  box-shadow: 0 0 1px #ffffff;
+  outline: ${listBorder};
 `;
 
 const YouTubeThumbnail = ({ ytId, width }) => {

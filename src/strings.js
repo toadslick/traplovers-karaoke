@@ -7,6 +7,7 @@ export default {
   roomAddFavorite: 'Add favorite',
   roomTvView: 'TV mode',
   songSearch: 'Search Videos',
+  createRoomTitle: 'Create Room',
   addSongTitle: 'Add Song to Queue',
   searchLabel: 'Search YouTube videos',
   searchButton: 'Search',

@@ -2,7 +2,9 @@
 
 import { css, jsx } from '@emotion/core';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { linkColor, activeColor, focusButtonColor } from '../styles';
+import { commonButtonMixin } from '../styles';
+
+const mainColor = '#07c';
 
 const listCss = css`
   display: flex;
@@ -10,15 +12,19 @@ const listCss = css`
   padding: 0;
   display: flex;
   list-style-type: none;
-  border: 1px solid ${focusButtonColor};
   margin: 0 15px 20px 15px;
-  border-radius: 8px;
+  border: 1px solid ${mainColor};
+  border-radius: 6px;
   overflow: hidden;
 `;
 
 const listItemCss = css`
   display: block;
   flex: 1 0;
+
+  & + & {
+    border-left: 1px solid ${mainColor};
+  }
 `;
 
 const linkCss = css`
@@ -27,33 +33,25 @@ const linkCss = css`
   text-align: center;
   font-weight: 600;
   padding: 7px;
-  outline: none;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
+  color: #fff;
 `;
 
-const inactiveLinkCss = css`
+const notCurrentLinkCss = css`
   ${linkCss}
-  color: ${linkColor};
-
-  &:active {
-    color: ${activeColor}
-  }
+  ${commonButtonMixin}
 `;
 
 const currentLinkCss = css`
   ${linkCss}
-  color: #000;
-  background: ${focusButtonColor};
+  background: ${mainColor};
 `;
 
 const Segment = ({ path, label }) => {
   const isMatch = useRouteMatch({ path, exact: true });
-  return (
-    <Link css={isMatch ? currentLinkCss : inactiveLinkCss} to={path}>
+  return isMatch ? (
+    <span css={currentLinkCss}>{label}</span>
+  ) : (
+    <Link css={notCurrentLinkCss} to={path}>
       {label}
     </Link>
   );
