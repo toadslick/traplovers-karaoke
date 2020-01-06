@@ -3,19 +3,17 @@ import EditRoom from './EditRoom';
 import JoinRoom from './JoinRoom';
 import ListRooms from './ListRooms';
 import ViewRoom from './ViewRoom';
-import SearchSongs from './SearchSongs';
-import FavoriteSongs from './FavoriteSongs';
+import AddSong from './AddSong';
 import DisplayRoom from './DisplayRoom';
 
 const routes = [
-  { Component: ListRooms, path: '/' },
-  { Component: CreateRoom, path: '/room/new' },
-  { Component: JoinRoom, path: '/room/:id/join' },
-  { Component: ViewRoom, path: '/room/:id' },
-  { Component: DisplayRoom, path: '/room/:id/play' },
-  { Component: EditRoom, path: '/room/:id/edit' },
-  { Component: SearchSongs, path: '/room/:id/search' },
-  { Component: FavoriteSongs, path: '/room/:id/favorites' },
+  { Component: ListRooms, path: '/', exact: true },
+  { Component: CreateRoom, path: '/room/new', exact: true },
+  { Component: JoinRoom, path: '/room/:id/join', exact: true },
+  { Component: ViewRoom, path: '/room/:id', exact: true },
+  { Component: DisplayRoom, path: '/room/:id/play', exact: true },
+  { Component: EditRoom, path: '/room/:id/edit', exact: true },
+  { Component: AddSong, path: '/room/:id/song', exact: false },
 ];
 
 export default routes;

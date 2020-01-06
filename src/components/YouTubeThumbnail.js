@@ -1,5 +1,15 @@
-import React from 'react';
+/** @jsx jsx */
+
+import { css, jsx } from '@emotion/core';
+
 import { HD_VIDEO_RATIO } from '../utils/constants';
+import { listBorder } from '../styles';
+
+const imgCss = css`
+  object-fit: cover;
+  flex-shrink: 0;
+  outline: ${listBorder};
+`;
 
 const YouTubeThumbnail = ({ ytId, width }) => {
   const url = `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`;
@@ -7,16 +17,16 @@ const YouTubeThumbnail = ({ ytId, width }) => {
     <img
       alt=""
       aria-hidden="true"
+      css={imgCss}
       height={width * HD_VIDEO_RATIO}
       src={url}
-      style={{ objectFit: 'cover' }}
       width={width}
     />
   );
 };
 
 YouTubeThumbnail.defaultProps = {
-  width: 120,
+  width: 100,
 };
 
 export default YouTubeThumbnail;

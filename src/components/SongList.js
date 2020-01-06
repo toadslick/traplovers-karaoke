@@ -2,7 +2,8 @@ import React from 'react';
 import { FirestoreCollection } from 'react-firestore';
 import Loader from './Loader';
 import SongListItem from './SongListItem';
-import withAuthorizedRoom from '../components/withAuthorizedRoom';
+import withAuthorizedRoom from './withAuthorizedRoom';
+import List from './List';
 import t from '../utils/translate';
 
 const SongList = ({ roomId }) => {
@@ -13,11 +14,11 @@ const SongList = ({ roomId }) => {
         return isLoading ? (
           <Loader />
         ) : data.length ? (
-          <ul>
-            {data.map(props => (
-              <SongListItem {...props} key={props.id} />
+          <List>
+            {data.map((props, index) => (
+              <SongListItem {...props} index={index} key={props.id} />
             ))}
-          </ul>
+          </List>
         ) : (
           <p>{t('songsEmptySet')}</p>
         );

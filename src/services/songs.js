@@ -1,8 +1,4 @@
-const parseQuerySnapshot = snapshot =>
-  snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+import parseQuerySnapshot from '../utils/parseQuerySnapshot';
 
 // Whenever the Firebase selection of songs changes,
 // this services sends an UPDATE_SONGS event to its parent,

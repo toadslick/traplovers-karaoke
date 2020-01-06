@@ -4,6 +4,7 @@ import segueMachine from './segue';
 import videoMachine from './video';
 import songsService from './songs';
 import playerService from './player';
+import commandsService from './commands';
 
 const CONFIG = {
   id: 'karaoke',
@@ -161,6 +162,10 @@ const CONFIG = {
       src: 'songs',
     },
 
+    {
+      src: 'commands',
+    },
+
     // This service represents the YouTube iframe player.
     // It sends events to this machine whenevr the player's state changes.
     {
@@ -183,6 +188,8 @@ const CONFIG = {
 const playerMachine = (firestore, roomId) => {
   const songCollection = firestore.collection(`rooms/${roomId}/songs`);
   const songQuery = songCollection.orderBy('created');
+  const commandCollection = firestore.collection(`rooms/${roomId}/commands`);
+  const commandQuery = commandCollection.orderBy('created');
 
   return Machine(CONFIG, {
     actions: {
@@ -217,6 +224,7 @@ const playerMachine = (firestore, roomId) => {
       video: videoMachine,
       songs: songsService(songQuery),
       player: playerService,
+      commands: commandsService(commandQuery),
     },
   });
 };

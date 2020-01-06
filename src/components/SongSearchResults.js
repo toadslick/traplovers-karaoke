@@ -3,6 +3,7 @@ import { connect } from 'react-refetch';
 
 import Loader from './Loader';
 import SongSearchListItem from './SongSearchListItem';
+import List from './List';
 import getSecret from '../utils/getSecret';
 
 const SongSearchList = ({ resultsFetch }) => {
@@ -18,13 +19,13 @@ const SongSearchList = ({ resultsFetch }) => {
       // If the request has succeeded and has results, display the search results.
     } else if (fulfilled && value.items && value.items.length) {
       return (
-        <ul>
+        <List>
           {value.items.map(({ id: { videoId }, snippet: { title } }) => {
             return (
               <SongSearchListItem key={videoId} title={title} ytId={videoId} />
             );
           })}
-        </ul>
+        </List>
       );
     }
   }
