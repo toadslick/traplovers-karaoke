@@ -10,6 +10,7 @@ import Unescape from './Unescape';
 import YouTubeThumbnail from './YouTubeThumbnail';
 import FavoriteToggle from './FavoriteToggle';
 import { commonButtonMixin, listItemMixin } from '../styles';
+import SongHistoryContext from '../contexts/SongHistory';
 
 const liCss = css`
   display: flex;
@@ -39,16 +40,24 @@ const SongSearchListItem = ({ firestore, ytId, title }) => {
   const { getRoomAuth } = useContext(RoomAuthContext);
   const { id: roomId } = useParams();
   const history = useHistory();
+  const { addSong: addSongToHistory } = useContext(SongHistoryContext);
 
   const onClick = e => {
     e.preventDefault();
+
+    // This is where the song is added to the Firestore collection
     firestore.collection(`rooms/${roomId}/songs`).add({
       singer: getRoomAuth().name,
       ytId,
       created: Date.now(),
       title,
     });
+
+    addSongToHistory(ytId, title);
+
+    // Redirects to the room route.
     history.push(`/room/${roomId}`);
+
   };
 
   // YouTube's `hqdefault` images always display in 4:3 aspect ratio with black bars
