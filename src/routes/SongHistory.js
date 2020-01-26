@@ -11,8 +11,8 @@ const SongHistory = () => {
     <>
       {songCount() ? (
         <List>
-          {mapSongs((ytId, title) => (
-            <SongSearchListItem key={ytId} title={title} ytId={ytId} />
+          {mapSongs((ytId, title, index) => (
+            <SongSearchListItem key={`${index}-${ytId}`} title={title} ytId={ytId} />
           ))}
         </List>
       ) : (
