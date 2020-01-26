@@ -16,7 +16,7 @@ const SongList = ({ roomId }) => {
         ) : data.length ? (
           <List>
             {data.map((props, index) => (
-              <SongListItem {...props} index={index} key={props.id} />
+              <SongListItem {...props} index={index} key={`${index}-${props.id}`} />
             ))}
           </List>
         ) : (

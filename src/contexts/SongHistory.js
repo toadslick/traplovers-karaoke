@@ -11,13 +11,16 @@ const saveSongs = obj => localStorage.setItem(KEY, JSON.stringify(obj));
 // Add a song to the user's history.
 const addSong = (ytId, title) => {
   songs.unshift({ ytId, title });
-  saveSongs(songs);
+  // Only keep the first 50 songs in history
+  let songsSliced = songs.slice(0, 49);
+  saveSongs(songsSliced);
 };
 
 // Return the user's total number of history.
 const songCount = () => songs.length;
 
-const mapSongs = fn => songs.map(song => fn(song.ytId, song.title));
+const mapSongs = fn =>
+  songs.map((song, index) => fn(song.ytId, song.title, index));
 
 // As a safety measure, the entire `songs` object is NEVER exposed outside of this file.
 // This prevents the object from accidentally getting mutated.
