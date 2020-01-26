@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/traplovers-karaoke/static/css/main.87fbe6f4.chunk.css",
+    "main.js": "/traplovers-karaoke/static/js/main.45a88b03.chunk.js",
+    "main.js.map": "/traplovers-karaoke/static/js/main.45a88b03.chunk.js.map",
+    "runtime-main.js": "/traplovers-karaoke/static/js/runtime-main.775dbd99.js",
+    "runtime-main.js.map": "/traplovers-karaoke/static/js/runtime-main.775dbd99.js.map",
+    "static/js/2.d92e3ac8.chunk.js": "/traplovers-karaoke/static/js/2.d92e3ac8.chunk.js",
+    "static/js/2.d92e3ac8.chunk.js.map": "/traplovers-karaoke/static/js/2.d92e3ac8.chunk.js.map",
+    "index.html": "/traplovers-karaoke/index.html",
+    "precache-manifest.69d08f9d50863ae3122284925c89ad59.js": "/traplovers-karaoke/precache-manifest.69d08f9d50863ae3122284925c89ad59.js",
+    "service-worker.js": "/traplovers-karaoke/service-worker.js",
+    "static/css/main.87fbe6f4.chunk.css.map": "/traplovers-karaoke/static/css/main.87fbe6f4.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.775dbd99.js",
+    "static/js/2.d92e3ac8.chunk.js",
+    "static/css/main.87fbe6f4.chunk.css",
+    "static/js/main.45a88b03.chunk.js"
+  ]
+}
