@@ -22,6 +22,7 @@ const ViewRoom = ({ room: { id, name } }) => (
     <RoomControls roomId={id} />
     <p>
       <Link to={`/room/${id}/play`}>{t('roomTvView')}</Link>
+      <Link to={`/room/${id}/edit`}>{t('editRoomLink')}</Link>
     </p>
   </Fragment>
 );

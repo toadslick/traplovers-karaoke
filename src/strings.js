@@ -19,6 +19,7 @@ export default {
   favoritesTitle: 'Favorites',
   favoritesEmpty: "You don't have any favorite videos.",
   addRoomLink: 'Create Room',
+  editRoomLink: 'Edit Room',
   favoritesLink: 'Favorites',
   historyTitle: 'History',
   historyEmpty: 'You have not sung any songs yet in this room',
