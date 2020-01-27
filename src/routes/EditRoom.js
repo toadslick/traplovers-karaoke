@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { withFirestore } from 'react-firestore';
 import withAuthorizedRoom from '../components/withAuthorizedRoom';
+import RoomAuthContext from '../contexts/RoomAuth';
+import { useHistory } from 'react-router-dom';
 
 const EditRoom = ({ firestore, room }) => {
   // pass in the existing name/pw per roomID?
   // was going to use useParams, but think this is best
   const [roomName, setRoomName] = useState(room.name);
   const [password, setPassword] = useState(room.password);
+  const { setRoomAuth } = useContext(RoomAuthContext);
+  const history = useHistory();
+
+  const redirectToRoom = roomId => {
+    history.push(`/room/${roomId}`);
+  };
 
   const updateRoomListings = data => {
     firestore
@@ -27,6 +35,8 @@ const EditRoom = ({ firestore, room }) => {
             roomName,
             sortKey: roomName.toLowerCase(),
           });
+        setRoomAuth(roomName, room.id, password);
+        redirectToRoom(room.id);
       });
   };
 
